@@ -1,5 +1,7 @@
 const range = require('express-range')
 const compression = require('compression')
+//load the cors library
+const cors = require('cors')
 
 const express = require('express')
 
@@ -10,6 +12,9 @@ const CitiesDB = require('./zipsdb')
 const db = CitiesDB(data);
 
 const app = express();
+
+//add CORS to all routes
+app.use(cors())
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -74,8 +79,6 @@ app.post('/api/city',
 			}
 )
 
-
-
 // Optional workshop
 // TODO HEAD /api/state/:state
 // IMPORTANT: HEAD must be place before GET for the
@@ -100,12 +103,7 @@ app.get('/api/states/:state/count',
 				resp.json(result)
 			}
 )
-
-
-
-
 // TODO GET /api/city/:name
-
 
 // End of workshop
 
